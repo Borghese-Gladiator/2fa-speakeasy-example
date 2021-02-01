@@ -1,27 +1,28 @@
-
+// DEPENDENCIES
 const express = require("express");
+const path = require('path');
 const bodyParser = require('body-parser');
 const JsonDB = require('node-json-db').JsonDB;
 const Config = require('node-json-db/dist/lib/JsonDBConfig').Config;
 const uuid = require("uuid");
 const speakeasy = require("speakeasy");
 
+// MIDDLEWARE
 const app = express();
+app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // The second argument is used to tell the DB to save after each push
 // If you put false, you'll have to call the save() method.
 // The third argument is to ask JsonDB to save the database in an human readable format. (default false)
 // The last argument is the separator. By default it's slash (/)
-var db = new JsonDB(new Config("myDataBase", true, false, '/'));
+let db = new JsonDB(new Config("myDataBase", true, false, '/'));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
+// ROUTES
 app.get("/api", (req,res) => {
   res.json({ message: "Welcome to the two factor authentication exmaple" })
 });
-
-
 app.post("/api/register", (req, res) => {
   const id = uuid.v4();
   try {
@@ -37,7 +38,6 @@ app.post("/api/register", (req, res) => {
     res.status(500).json({ message: 'Error generating secret key'})
   }
 })
-
 app.post("/api/verify", (req,res) => {
   const { userId, token } = req.body;
   try {
@@ -63,7 +63,6 @@ app.post("/api/verify", (req,res) => {
     res.status(500).json({ message: 'Error retrieving user'})
   };
 })
-
 app.post("/api/validate", (req,res) => {
   const { userId, token } = req.body;
   try {
@@ -89,9 +88,13 @@ app.post("/api/validate", (req,res) => {
     res.status(500).json({ message: 'Error retrieving user'})
   };
 })
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+});
 
-const port = process.env.PORT || 5000;
-
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App is running on PORT: ${port}.`);
 });
