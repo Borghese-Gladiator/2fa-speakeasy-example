@@ -1,6 +1,7 @@
 // DEPENDENCIES
 const express = require("express");
 const path = require('path');
+const cors = require('cors')
 const bodyParser = require('body-parser');
 const JsonDB = require('node-json-db').JsonDB;
 const Config = require('node-json-db/dist/lib/JsonDBConfig').Config;
@@ -9,7 +10,7 @@ const speakeasy = require("speakeasy");
 
 // MIDDLEWARE
 const app = express();
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -88,13 +89,20 @@ app.post("/api/validate", (req,res) => {
     res.status(500).json({ message: 'Error retrieving user'})
   };
 })
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
 
-const port = process.env.PORT || 3000;
+// HEROKU - serve build folder
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'client', 'build')));
+  // The "catchall" handler: for any request that doesn't
+  // match one above, send back React's index.html file.
+  // Lets React Router handle routing
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`App is running on PORT: ${port}.`);
 });
