@@ -14,6 +14,8 @@ import MyBackgroundImg from '../assets/background-image.jpg';
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
+    display: 'flex',
+    alignItems: 'center',
     padding: theme.spacing(15, 0, 30),
   },
   buttons: {
@@ -35,15 +37,15 @@ export default function HomePage(props) {
   const registerButton = registerArrowShown ? <>{"Register"} <ArrowRightAltIcon /></> : <>{"Register"}</>
 
   return (
-    <div id={id} className={classes.heroContent} style={{ backgroundImage: `url(${MyBackgroundImg})`, backgroundSize: 'cover'}}>
+    <div className={classes.heroContent} style={{ minHeight: '40vh', background: "linear-gradient(#393e46, #00adb5)"}}>
       <Container maxWidth="sm">
-        <Paper>
+        <Paper style={{padding: 10}}>
           <Typography variant="h4" align="center" color="textPrimary">
             Speakeasy 2FA User Interface
           </Typography>
           <br />
           <Typography variant="h6" align="center" color="textPrimary">
-            Full-stack app with React + Express, users authenticate with 2FA.
+            Full-stack app with React + Express + (JSON file database), users authenticate with 2FA.
           </Typography>
           <div className={classes.buttons}>
             <Grid container spacing={2} justify="center">
