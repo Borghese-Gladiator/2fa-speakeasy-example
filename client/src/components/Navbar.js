@@ -29,7 +29,7 @@ function Navbar() {
         <Link to="/" style={{textDecoration: 'none'}}>
           <Box display="flex" alignItems='center'>
             <CodeIcon fontSize="large" gutterBottom/>
-            <Typography variant="h4">MERN</Typography>
+            <Typography variant="h4">EZ_2FA</Typography>
           </Box>
         </Link>
         <div className={classes.grow} />
