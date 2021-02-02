@@ -51,7 +51,7 @@ export default function HomePage(props) {
             <Grid container spacing={2} justify="center">
               <Grid item>
                 <Link
-                  ariaLabel="Register Link"
+                  aria-label="Register Link"
                   to="/register"
                   style={{textDecoration: 'none'}}
                 >
@@ -69,7 +69,7 @@ export default function HomePage(props) {
               </Grid>
               <Grid item>
                 <Link
-                  ariaLabel="Login Link"
+                  aria-label="Login Link"
                   to="/login"
                   style={{textDecoration: 'none'}}
                 >
