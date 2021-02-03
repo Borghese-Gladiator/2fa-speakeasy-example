@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-import PrivateRoute from './context/PrivateRoute';
-import { AuthContext } from "./context/auth";
+import React from 'react';
+import PrivateRoute from './components/PrivateRoute';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 // custom components
@@ -21,26 +19,19 @@ import Validate from './components/Validate';
 // /api/validate
 
 function App() {
-  const [authTokens, setAuthTokens] = useState();
-  
-  const setTokens = (data) => {
-    localStorage.setItem("tokens", JSON.stringify(data));
-    setAuthTokens(data);
-  }
+
   return (
-    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
-      <Router>
-        <div>
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/register" component={Register} />
-            <Route path="/verify" component={Verify} />
-            <PrivateRoute path="/validate" component={Validate} />
-          </Switch>
-        </div>
-      </Router>
-    </AuthContext.Provider>
+    <Router>
+      <div>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/register" component={Register} />
+          <Route path="/verify" component={Verify} />
+          <PrivateRoute path="/validate" component={Validate} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

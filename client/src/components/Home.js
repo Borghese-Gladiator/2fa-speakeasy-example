@@ -33,7 +33,7 @@ function Home(props) {
   const classes = useStyles();
   const [loginArrowShown, setLoginArrowShown] = useState(false);
   const [registerArrowShown, setRegisterArrowShown] = useState(false);
-  const hololiveButton = loginArrowShown ? <>{"Log In"} <ArrowRightAltIcon /></> : <>{"Log In"}</>
+  const hololiveButton = loginArrowShown ? <>{"Login"} <ArrowRightAltIcon /></> : <>{"Login"}</>
   const registerButton = registerArrowShown ? <>{"Register"} <ArrowRightAltIcon /></> : <>{"Register"}</>
 
   return (
