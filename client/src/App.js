@@ -11,7 +11,6 @@ import {
 // custom components
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import Login from './components/Login';
 import Register from './components/Register';
 import Verify from './components/Verify';
 import Validate from './components/Validate';
@@ -35,9 +34,8 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            <PrivateRoute path="/verify" component={Verify} />
+            <Route path="/verify" component={Verify} />
             <PrivateRoute path="/validate" component={Validate} />
           </Switch>
         </div>
