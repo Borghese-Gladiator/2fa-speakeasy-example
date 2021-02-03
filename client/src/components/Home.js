@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function HomePage(props) {
+function Home(props) {
   const classes = useStyles();
   const [loginArrowShown, setLoginArrowShown] = useState(false);
   const [registerArrowShown, setRegisterArrowShown] = useState(false);
@@ -70,7 +70,7 @@ export default function HomePage(props) {
               <Grid item>
                 <Link
                   aria-label="Login Link"
-                  to="/login"
+                  to="/verify"
                   style={{textDecoration: 'none'}}
                 >
                   <Button
@@ -92,3 +92,5 @@ export default function HomePage(props) {
     </div>
   );
 }
+
+export default Home;
